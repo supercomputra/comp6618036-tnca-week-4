@@ -17,11 +17,17 @@ class Authentication {
   std::uint64_t current_authenticated_user_id;
 
   User sign_up() {
-    std::string name = string_input("Please input your name");
-    std::string address = string_input("Please input your address");
     std::string email = string_input("Please input your email");
+    if (is_valid_email(email) != true) {
+      print_error("Invalid email format\n");
+      return this->sign_up();
+    }
+
     std::string password = string_input("Please input your password");
     int64_t hashed_password = hash(password);
+
+    std::string name = string_input("Please input your name");
+    std::string address = string_input("Please input your address");
     User user = {
         .id = current_timestamp(),
         .hashed_password = hashed_password,

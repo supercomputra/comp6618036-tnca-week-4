@@ -21,7 +21,7 @@ class App {
   // This method will ask user for menu input
   // The number selected by the user shouls map properly
   // depends on the order of initialized menu_items
-  int run() {
+  void run() {
     User current_user = authentication->current_user();
 
     std::string title = "Welcome " + current_user.name + "!";
@@ -48,12 +48,9 @@ class App {
       this->run();
     }
 
-    if (selected == 5) {
+    else {
       authentication->sign_out();
       this->run();
     }
-
-    // For unxexpected selection
-    return 1;
   }
 };

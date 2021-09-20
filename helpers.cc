@@ -3,6 +3,7 @@
 
 #include <chrono>
 #include <iostream>
+#include <regex>
 #include <string>
 #include <vector>
 
@@ -104,4 +105,9 @@ int64_t hash(std::string value) {
   std::hash<std::string> hasher;
   int64_t hashed_value = hasher(value);
   return hashed_value;
+}
+
+bool is_valid_email(std::string email) {
+  const std::regex pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+  return std::regex_match(email, pattern);
 }

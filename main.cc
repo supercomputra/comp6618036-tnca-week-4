@@ -2,5 +2,6 @@
 
 int main() {
   App* app = new App();
-  return app->run();
+  app->run();
+  return 0;
 };
