@@ -2,6 +2,7 @@
 #include <string>
 
 struct Inventory {
-  uint64_t id;
+  std::string id;
   std::string name;
+  double price;
 };
