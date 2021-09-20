@@ -35,16 +35,19 @@ void App::run() {
 
   if (selected == 2) {
     print_error("Purchase by item hasn't implemented yet\n");
+    print_error("Please create pull request related to the issue https://github.com/supercomputra/comp6618036-tnca-week-4/issues/1 \n");
     this->run();
   }
 
   if (selected == 3) {
-    print_error("Purchase by prescription hasn't implemented yet\n");
+    print_error("Purchase by prescription hasn't implemented yet.\n");
+    print_error("Please create pull request related to the issue https://github.com/supercomputra/comp6618036-tnca-week-4/issues/2 \n");
     this->run();
   }
 
   if (selected == 4) {
     print_error("Purchase detail hasn't implemented yet\n");
+    print_error("Please create pull request related to the issue https://github.com/supercomputra/comp6618036-tnca-week-4/issues/3 \n");
     this->run();
   }
 
