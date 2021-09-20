@@ -2,11 +2,13 @@
 #include <vector>
 
 #include "authentication.cc"
+#include "store.cc"
 
 class App {
  private:
   std::vector<std::string> menu_items;
   Authentication* authentication;
+  Store* store;
 
  public:
   App() {
@@ -16,6 +18,7 @@ class App {
     this->menu_items.push_back("Purchase Detail");
     this->menu_items.push_back("Sign Out");
     this->authentication = new Authentication();
+    this->store = new Store();
   }
 
   // This method will ask user for menu input
