@@ -1,3 +1,5 @@
+#ifndef USER_HPP
+#define USER_HPP
 
 #include <string>
 
@@ -8,3 +10,5 @@ struct User {
   std::string name;
   std::string address;
 };
+
+#endif

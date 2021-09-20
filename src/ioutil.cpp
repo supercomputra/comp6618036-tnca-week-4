@@ -1,23 +1,8 @@
-// THESE ARE SOME HELPER METHODS
-// PLEASE ADD ADDITIONAL FUNCTION AS NEEDED
+#include "ioutil.hpp"
 
-#include <chrono>
 #include <iostream>
-#include <regex>
 #include <string>
 #include <vector>
-
-// Get current timestamp
-// The timestamp return as milliseconds since epoch
-uint64_t current_timestamp() {
-  using std::chrono::duration_cast;
-  using std::chrono::milliseconds;
-  using std::chrono::system_clock;
-  using std::chrono::time_point;
-  time_point<system_clock> current = system_clock::now();
-  milliseconds milliseconds_since_epoch = duration_cast<milliseconds>(current.time_since_epoch());
-  return milliseconds_since_epoch.count();
-}
 
 // print some string to the out stream
 // add end of line at the end
@@ -39,7 +24,7 @@ void print_success(std::string s) {
 
 // Get user input and print some given string
 // return user input value
-std::string string_input(std::string s) {
+std::string string_line_input(std::string s) {
   if (s.empty() == false) {
     std::cout << s << ": ";
   };
@@ -50,9 +35,21 @@ std::string string_input(std::string s) {
 }
 
 // Get user input and print some given string
+// return user input value
+std::string string_input(std::string s) {
+  if (s.empty() == false) {
+    std::cout << s << ": ";
+  };
+
+  std::string value;
+  std::cin >> value;
+  return value;
+}
+
+// Get user input and print some given string
 // return user input value as integer
 int number_input(std::string s) {
-  std::string input = string_input(s);
+  std::string input = string_line_input(s);
   try {
     int number = std::stoi(input);
     return number;
@@ -68,9 +65,7 @@ int number_input(std::string s) {
   }
 }
 
-// Get user input as menu selection
-// Construct dialog from title and selections
-// This method will call it self when receiving unexpected input
+// Get user input for given menu
 int menu_input(std::string title, std::string question, std::vector<std::string> selections) {
   std::string dialog = "============MENU============\n";
   dialog.append(title + "\n");
@@ -92,22 +87,4 @@ int menu_input(std::string title, std::string question, std::vector<std::string>
   }
 
   return selected_number;
-}
-
-// returns random double with given min and max bound
-// Only use to generate double value for bill's past due amount
-double random_double(double min, double max) {
-  double f = rand() / (RAND_MAX + 1.0);
-  return min + f * (max - min);
-}
-
-int64_t hash(std::string value) {
-  std::hash<std::string> hasher;
-  int64_t hashed_value = hasher(value);
-  return hashed_value;
-}
-
-bool is_valid_email(std::string email) {
-  const std::regex pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
-  return std::regex_match(email, pattern);
 }
