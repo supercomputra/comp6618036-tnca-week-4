@@ -29,35 +29,27 @@ void App::run() {
   int selected = menu_input(title, question, this->menu_items);
 
   if (selected == 1) {
-    this->print_all_items();
-    this->run();
+    get_inventory_list();
+    run();
   }
-
   if (selected == 2) {
-    print_error("Purchase by item hasn't implemented yet\n");
-    print_error("Please create pull request related to the issue https://github.com/supercomputra/comp6618036-tnca-week-4/issues/1 \n");
-    this->run();
+    purchase_by_inventory();
+    run();
   }
-
   if (selected == 3) {
-    print_error("Purchase by prescription hasn't implemented yet.\n");
-    print_error("Please create pull request related to the issue https://github.com/supercomputra/comp6618036-tnca-week-4/issues/2 \n");
-    this->run();
+    purchase_by_prescription();
+    run();
   }
-
   if (selected == 4) {
-    print_error("Purchase detail hasn't implemented yet\n");
-    print_error("Please create pull request related to the issue https://github.com/supercomputra/comp6618036-tnca-week-4/issues/3 \n");
-    this->run();
-  }
-
-  else {
+    get_purchase_detail();
+    run();
+  } else {
     auth->sign_out();
-    this->run();
+    run();
   }
 }
 
-void App::print_all_items() {
+void App::get_inventory_list() {
   std::vector<Inventory> items = this->store->all_items();
 
   print("Here are our available items:");
@@ -70,4 +62,22 @@ void App::print_all_items() {
     print(row);
   }
   print("==================================================================");
+}
+
+void App::purchase_by_inventory() {
+  print_error("Purchase by item hasn't implemented yet\n");
+  print_error("Please create pull request related to the issue https://github.com/supercomputra/comp6618036-tnca-week-4/issues/1 \n");
+  this->run();
+}
+
+void App::purchase_by_prescription() {
+  print_error("Purchase by prescription hasn't implemented yet\n");
+  print_error("Please create pull request related to the issue https://github.com/supercomputra/comp6618036-tnca-week-4/issues/2 \n");
+  this->run();
+}
+
+void App::get_purchase_detail() {
+  print_error("Purchase detail hasn't implemented yet\n");
+  print_error("Please create pull request related to the issue https://github.com/supercomputra/comp6618036-tnca-week-4/issues/3 \n");
+  this->run();
 }

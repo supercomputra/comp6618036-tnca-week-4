@@ -23,8 +23,13 @@ class App {
   // depends on the order of initialized menu_items
   void run();
 
-  // Print all available item
-  void print_all_items();
+  void get_inventory_list();
+
+  void purchase_by_inventory();
+
+  void purchase_by_prescription();
+
+  void get_purchase_detail();
 };
 
 #endif
