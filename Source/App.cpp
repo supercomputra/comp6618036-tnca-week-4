@@ -100,7 +100,15 @@ void App::puchaseByPrescription() {
 }
 
 void App::getPurchaseDetail() {
-  printError("Purchase detail hasn't implemented yet\n");
-  printError("Please create pull request related to the issue https://github.com/supercomputra/comp6618036-tnca-week-4/issues/3 \n");
+  Order order = store->fetchOrder();
+  String summary = store->summary(order.cart);
+  print("Here is your order detail:");
+  String dialog;
+  User user = auth->currentUser();
+  dialog += "* Customer Name\t\t\t: " + user.profile.name + "\n";
+  dialog += "* Customer Email\t\t: " + user.email + "\n";
+  dialog += "* Customer Address\t\t: " + user.profile.address + "\n";
+  print(dialog);
+  print(summary);
   run();
 }

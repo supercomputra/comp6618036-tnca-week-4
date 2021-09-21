@@ -78,6 +78,25 @@ int readNumberInput(String s) {
   }
 }
 
+// Get user input and print some given string
+// return user input value as integer
+UInt64 readLongNumberInput(String s) {
+  String input = readLineInput(s);
+  try {
+    UInt64 number = std::stoull(input);
+    return number;
+  } catch (std::invalid_argument& e) {
+    printError("Invalid number\n");
+    return readNumberInput(s);
+  } catch (std::out_of_range& e) {
+    printError("The number you input is out of range.\n");
+    return readNumberInput(s);
+  } catch (...) {
+    printError("Something went wrong\n");
+    return readNumberInput(s);
+  }
+}
+
 // Get user input for given menu
 UInt16 readMenuInput(String title, String question, Vector<String> selections) {
   String dialog = "============MENU============\n";

@@ -20,12 +20,24 @@ class App {
 
   void run();
 
+  /**
+   * Purchase by list
+   */
   void getInventoryList();
 
+  /**
+   * Purchase by inventory
+   */
   void purchaseByInventory();
 
+  /**
+   * Purchase by prescription 
+   */
   void puchaseByPrescription();
 
+  /**
+   * Purchase detail
+   */
   void getPurchaseDetail();
 };
 

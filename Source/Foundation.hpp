@@ -7,12 +7,14 @@
 
 #include "HashMap.hpp"
 
+// Aliasing to improve code readabilty
 typedef std::string String;
 typedef bool Bool;
 typedef double Double;
 typedef long long Int64;
 typedef uint64_t UInt64;
 typedef int16_t UInt16;
+typedef int Int;
 
 template <typename T>
 using Vector = std::vector<T>;
@@ -58,7 +60,11 @@ Bool readBoolInput(String s);
 
 // Get user input and print some given string
 // return user input value as integer
-int readNumberInput(String s);
+Int readNumberInput(String s);
+
+// Get user input and print some given string
+// return user input value as integer
+UInt64 readLongNumberInput(String s);
 
 // Get user input for given menu
 UInt16 readMenuInput(String title, String question, Vector<String> selections);

@@ -4,52 +4,52 @@
 #include "Inventory.hpp"
 
 Store::Store() {
-  inventoryMap = new HashMap<InventoryCode, Inventory>();
-  inventoryStockMap = new HashMap<InventoryCode, UInt64>();
-  orderMap = new HashMap<OrderIdentifier, Order>();
-
   // Prepare predefined data
   Inventory panadol = {.code = "OBT001", .name = "Panadol", .price = 10000.0};
-  inventoryStockMap->set(panadol.code, 13);
-  inventoryMap->set(panadol.code, panadol);
+  inventoryStockMap.set(panadol.code, 13);
+  inventoryMap.set(panadol.code, panadol);
   inventories.push_back(panadol);
 
   Inventory sanmol = {.code = "OBT002", .name = "Sanmol", .price = 15000.0};
-  inventoryStockMap->set(sanmol.code, 13);
-  inventoryMap->set(sanmol.code, sanmol);
+  inventoryStockMap.set(sanmol.code, 13);
+  inventoryMap.set(sanmol.code, sanmol);
   inventories.push_back(sanmol);
 
   Inventory bodrex = {.code = "OBT003", .name = "Bodrex", .price = 11000.0};
-  inventoryStockMap->set(bodrex.code, 13);
-  inventoryMap->set(bodrex.code, bodrex);
+  inventoryStockMap.set(bodrex.code, 13);
+  inventoryMap.set(bodrex.code, bodrex);
   inventories.push_back(bodrex);
 }
 
-Store::~Store() {
-  delete inventoryMap;
-  delete inventoryStockMap;
-  delete orderMap;
-}
+Store::~Store() {}
 
 Vector<Inventory> Store::getInventories() {
   return inventories;
 }
 
 UInt16 Store::numberOfAvailableInventories(InventoryCode code) {
-  return inventoryStockMap->get(code);
+  return inventoryStockMap.get(code);
 }
 
-bool Store::contains(InventoryCode code) {
-  return inventoryMap->contains(code);
+bool Store::hasInventory(InventoryCode code) {
+  return inventoryMap.contains(code);
+}
+
+bool Store::hasOrder(OrderIdentifier id) {
+  return orderMap.contains(id);
 }
 
 Inventory Store::inventory(InventoryCode code) {
-  return inventoryMap->get(code);
+  return inventoryMap.get(code);
+}
+
+Order Store::order(OrderIdentifier id) {
+  return orderMap.get(id);
 }
 
 Order Store::purchase(Cart cart, User customer) {
   Order order = Order(customer, cart);
-  orderMap->set(order.id, order);
+  orderMap.set(order.id, order);
   return order;
 };
 
@@ -59,7 +59,7 @@ Cart Store::shop() {
 
   while (true) {
     InventoryCode code = readLineInput("Plese input the inventory code you want to purchase");
-    if (contains(code) == false) {
+    if (!hasInventory(code)) {
       printError("Invalid inventory code. Please try again\n");
       continue;
     }
@@ -82,6 +82,15 @@ Cart Store::shop() {
   }
 
   return cart;
+}
+
+Order Store::fetchOrder() {
+  OrderIdentifier id = readLongNumberInput("Plese input the order id you want to check");
+  if (!hasOrder(id)) {
+    printError("Order with given identifier not found. Please try again\n");
+    return fetchOrder();
+  }
+  return order(id);
 }
 
 String Store::summary(Cart cart) {
