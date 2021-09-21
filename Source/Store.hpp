@@ -1,6 +1,7 @@
 #ifndef STORE_HPP
 #define STORE_HPP
 
+#include "Cart.hpp"
 #include "Foundation.hpp"
 #include "HashMap.hpp"
 #include "Inventory.hpp"
@@ -52,21 +53,22 @@ class Store {
 
   /**
   * Purchase the order
-  * @param order the order
+  * @param cart the cart to be purchased
+  * @param customer the purchasing customer
+  * @return the order
   */
-  void purchase(Order order);
+  Order purchase(Cart cart, User customer);
 
   /**
   * @return the summary of the order
-  * @param order the order
+  * @param cart the cart
   */
-  String summary(Order order);
+  String summary(Cart cart);
 
   /**
   * Handle with shopping flow
   * @return the order created for the customer
-  * @param customer the customer to shop
   */
-  Order shop(User customer);
+  Cart shop();
 };
 #endif

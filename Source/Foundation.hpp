@@ -1,6 +1,7 @@
 #ifndef FOUNDATION_HPP
 #define FOUNDATION_HPP
 
+#include <set>
 #include <string>
 #include <unordered_map>
 #include <vector>

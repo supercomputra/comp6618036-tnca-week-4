@@ -79,14 +79,13 @@ void App::purchaseByInventory() {
 
   // Generate cart
   User customer = auth->currentUser();
-  Order order = store->shop(customer);
-  String summary = store->summary(order);
+  Cart cart = store->shop();
+  String summary = store->summary(cart);
   print(summary);
 
   Bool shouldProceed = readBoolInput("Are you sure to checkout");
   if (shouldProceed) {
-    // TODO: Purchase the order, this will store the order in the store
-    // store->purchase(order);
+    Order order = store->purchase(cart, customer);
     printSuccess("Order created with id " + std::to_string(order.id) + "\n");
     printSuccess("Thank you " + order.customer.profile.name + " for shopping with us!\n");
   }

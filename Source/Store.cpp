@@ -47,43 +47,45 @@ Inventory Store::inventory(InventoryCode code) {
   return inventoryMap->get(code);
 }
 
-void Store::purchase(Order order) {
+Order Store::purchase(Cart cart, User customer) {
+  Order order = Order(customer, cart);
   orderMap->set(order.id, order);
+  return order;
 };
 
-Order Store::shop(User customer) {
+Cart Store::shop() {
   // Generate cart
-  Order order = Order(customer);
+  Cart cart;
 
   while (true) {
-    String id = readLineInput("Plese input the inventory code you want to purchase");
-    if (contains(id) == false) {
+    InventoryCode code = readLineInput("Plese input the inventory code you want to purchase");
+    if (contains(code) == false) {
       printError("Invalid inventory code. Please try again\n");
       continue;
     }
 
     // Get inventory with the amount
-    Inventory inventory = this->inventory(id);
+    Inventory inventory = this->inventory(code);
     int amount = readNumberInput("Plese input the number of " + inventory.name + " you want");
 
-    UInt16 available = numberOfAvailableInventories(id);
-    UInt16 currentAmount = order.numberOfInventories(id);
+    UInt16 available = numberOfAvailableInventories(code);
+    UInt16 currentAmount = cart.amountForInventory(code);
 
     if ((currentAmount + amount) > available) {
-      printError("Insufficient stock for inventory with id" + inventory.code + "which only has " + std::to_string(available) + " in stock.\n");
+      printError("Insufficient stock for inventory with id" + code + "which only has " + std::to_string(available) + " in stock.\n");
     } else {
-      order.addToCart(inventory.code, amount);
+      cart.add(code, amount);
       if (!readBoolInput("Anything else")) {
         break;
       }
     }
   }
 
-  return order;
+  return cart;
 }
 
-String Store::summary(Order order) {
-  Vector<InventoryCode> keys = order.allInventoryIdentifiers();
+String Store::summary(Cart cart) {
+  Vector<InventoryCode> keys = cart.allCodes();
   if (keys.empty()) {
     return "";
   }
@@ -100,7 +102,7 @@ String Store::summary(Order order) {
   for (unsigned int i = 0; i < keys.size(); i++) {
     InventoryCode code = keys[i];
     Inventory inventory = this->inventory(code);
-    UInt16 amount = order.numberOfInventories(code);
+    UInt16 amount = cart.amountForInventory(code);
     total += (amount * inventory.price);
     summary.append(inventory.code + "\t" + inventory.name + "\t" + std::to_string(amount) + "\t" + formatCurrency("Rp", inventory.price) + "\t" + formatCurrency("Rp", (amount * inventory.price)) + "\n");
   }

@@ -9,6 +9,8 @@ class HashMap {
   std::unordered_map<Key, Value> dictionary;
 
  public:
+  HashMap<Key, Value>() {}
+
   // To check whether the hash map contains value for given key
   bool contains(Key key) {
     return dictionary.find(key) != dictionary.end();
