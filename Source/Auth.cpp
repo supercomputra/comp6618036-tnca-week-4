@@ -14,8 +14,8 @@ User Auth::createSuperuser() {
   User user = User(DEFAULT_SUPERUSER_EMAIL, DEFAULT_SUPERUSER_PASSWORD);
   user.profile.name = DEFAULT_SUPERUSER_NAME;
   user.profile.address = DEFAULT_SUPERUSER_ADDRESS;
-  registedUserIdentifierMap->set(user.email, user.id);
-  registedUserMap->set(user.id, user);
+  registedUserIdentifierMap.set(user.email, user.id);
+  registedUserMap.set(user.id, user);
   return user;
 }
 
@@ -52,7 +52,7 @@ User Auth::signUp() {
   String email = readLineInput("Please input your email");
   if (isValidEmailFormat(email) != true) {
     printError("Invalid email format\n");
-    return this->signUp();
+    return signUp();
   }
 
   // Create usr
@@ -61,8 +61,8 @@ User Auth::signUp() {
   user.profile.name = readLineInput("Please input your name");
   user.profile.address = readLineInput("Please input your address");
 
-  registedUserIdentifierMap->set(user.email, user.id);
-  registedUserMap->set(user.id, user);
+  registedUserIdentifierMap.set(user.email, user.id);
+  registedUserMap.set(user.id, user);
   printSuccess("User with email " + email + " has been created!\n");
   currentUserIdentifier = user.id;
   return user;
@@ -73,15 +73,15 @@ User Auth::signUp() {
 User Auth::signIn() {
   // Email validation
   String email = readLineInput("Email");
-  if (registedUserIdentifierMap->contains(email) != true) {
+  if (registedUserIdentifierMap.contains(email) != true) {
     printError("The user with given email not found\n");
-    return this->signIn();
+    return signIn();
   }
 
   // Password validation
   String password = readLineInput("Password");
-  UserIdentifier id = registedUserIdentifierMap->get(email);
-  User user = registedUserMap->get(id);
+  UserIdentifier id = registedUserIdentifierMap.get(email);
+  User user = registedUserMap.get(id);
   if (!user.isPasswordMatched(password)) {
     printError("The password is incorrect!\n");
     return currentUser();
@@ -95,17 +95,11 @@ Auth::Auth() {
   menuItems.push_back("Sign In");
   menuItems.push_back("Sign Up");
   menuItems.push_back("Exit");
-  registedUserIdentifierMap = new HashMap<String, UInt64>();
-  registedUserMap = new HashMap<UInt64, User>();
   currentUserIdentifier = 0;
   createSuperuser();
 }
 
-Auth::~Auth() {
-  delete registedUserIdentifierMap;
-  delete registedUserMap;
-  createSuperuser();
-}
+Auth::~Auth() {}
 
 void Auth::signOut() {
   currentUserIdentifier = 0;
@@ -114,8 +108,8 @@ void Auth::signOut() {
 // Get current authenticated user
 // This will handle with sign up and sign in flow if required
 User Auth::currentUser() {
-  if (this->currentUserIdentifier != 0) {
-    return registedUserMap->get(currentUserIdentifier);
+  if (currentUserIdentifier != 0) {
+    return registedUserMap.get(currentUserIdentifier);
   }
 
   String title = "Welcome!";

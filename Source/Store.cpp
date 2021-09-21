@@ -50,6 +50,20 @@ Order Store::order(OrderIdentifier id) {
 Order Store::purchase(Cart cart, User customer) {
   Order order = Order(customer, cart);
   orderMap.set(order.id, order);
+
+  // Update the stock
+  Vector<InventoryCode> codes = inventoryStockMap.allKeys();
+  for (unsigned int i = 0; i < codes.size(); i++) {
+    UInt16 reductedAmount = order.cart.amountForInventory(codes[i]);
+    if (reductedAmount > 0) {
+      UInt16 currentAmount = inventoryStockMap.get(codes[i]);
+      if (currentAmount <= reductedAmount) {
+        inventoryStockMap.set(codes[i], 0);
+      } else {
+        inventoryStockMap.set(codes[i], (currentAmount - reductedAmount));
+      }
+    }
+  }
   return order;
 };
 

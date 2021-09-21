@@ -13,10 +13,10 @@ class Auth {
   Vector<String> menuItems;
 
   // Map user email to the user id
-  HashMap<UserEmail, UserIdentifier>* registedUserIdentifierMap;
+  HashMap<UserEmail, UserIdentifier> registedUserIdentifierMap;
 
   // Map user id to the user detail
-  HashMap<UserIdentifier, User>* registedUserMap;
+  HashMap<UserIdentifier, User> registedUserMap;
 
   // Returns authenticated user id
   UserIdentifier currentUserIdentifier;

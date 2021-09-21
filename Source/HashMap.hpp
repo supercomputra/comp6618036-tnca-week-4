@@ -11,12 +11,22 @@ class HashMap {
  public:
   HashMap<Key, Value>() {}
 
-  // To check whether the hash map contains value for given key
+  /**
+   * To check whether the hash map contains value for given key
+   * 
+   * @param key the key
+   * @return boolean telling whether the key exists or not
+  */
   bool contains(Key key) {
     return dictionary.find(key) != dictionary.end();
   }
 
-  // Returns value for given key
+  /**
+   * Returns value for given key
+   * 
+   * @param key the key
+   * @return the associated value for the given key
+  */
   Value get(Key key) {
     if (contains(key)) {
       return dictionary[key];
@@ -24,16 +34,30 @@ class HashMap {
     throw "Not Found";
   }
 
-  // Set value for given key
+  /**
+   * Set key value
+   * 
+   * @param key the key
+   * @param value the value
+  */
   void set(Key key, Value value) {
     dictionary[key] = value;
   }
 
-  // Remove value for given key
+  /**
+   * Remove value for given key
+   * 
+   * @param key the key
+  */
   void remove(Key key) {
     dictionary.erase(key);
   }
 
+  /**
+   * Get all available keys
+   * 
+   * @return list of available keys
+  */
   std::vector<Key> allKeys() {
     std::vector<Key> keys;
     for (std::pair<Key, Value> item : dictionary) {
