@@ -101,6 +101,11 @@ void App::puchaseByPrescription() {
 
 void App::getPurchaseDetail() {
   Order order = store->fetchOrder();
+  if (order.customer.id != auth->currentUser().id) {
+    printError("The order id you are fetching is belong to someone else. Please try agin!\n");
+    return getPurchaseDetail();
+  }
+
   String summary = store->summary(order.cart);
   print("Here is your order detail:");
   String dialog;
