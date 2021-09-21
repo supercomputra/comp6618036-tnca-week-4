@@ -1,8 +1,7 @@
-#include "src/app.cpp"
-#include "src/auth.cpp"
-#include "src/helpers.cpp"
-#include "src/ioutil.cpp"
-#include "src/store.cpp"
+#include "Source/App.cpp"
+#include "Source/Auth.cpp"
+#include "Source/Foundation.cpp"
+#include "Source/Store.cpp"
 
 int main(int argc, char* argv[]) {
   App* app = new App();
