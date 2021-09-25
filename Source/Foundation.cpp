@@ -111,7 +111,7 @@ UInt64 readMenuInput(String title, String question, Vector<String> selections) {
 
   dialog.append("============================\n");
   dialog.append(question);
-  int selected = readNumberInput(dialog);
+  UInt64 selected = readNumberInput(dialog);
   if ((selected > std::numeric_limits<UInt64>::max()) || (selected < std::numeric_limits<UInt64>::min())) {
     printError("The number is out of range. Please try again!\n");
   }
