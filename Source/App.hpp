@@ -18,7 +18,7 @@ class App {
 
   ~App();
 
-  void run();
+  int run();
 
   /**
    * Purchase by list

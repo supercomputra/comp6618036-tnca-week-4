@@ -26,8 +26,13 @@ App::~App() {
 // This method will ask user for menu input
 // The number selected by the user shouls map properly
 // depends on the order of initialized menu_items
-void App::run() {
-  User user = auth->currentUser();
+int App::run() {
+  User user;
+  try {
+    user = auth->currentUser();
+  } catch(...) {
+    return 0;
+  }
 
   String title = "Welcome " + user.profile.name + "!";
   String question = "Please input the number associated with the menu";
@@ -35,22 +40,22 @@ void App::run() {
 
   if (selected == 1) {
     getInventoryList();
-    run();
+    return run();
   }
   if (selected == 2) {
     purchaseByInventory();
-    run();
+    return run();
   }
   if (selected == 3) {
     puchaseByPrescription();
-    run();
+    return run();
   }
   if (selected == 4) {
     getPurchaseDetail();
-    run();
+    return run();
   } else {
     auth->signOut();
-    run();
+    return run();
   }
 }
 

@@ -121,12 +121,14 @@ User Auth::currentUser() {
 
   if (selected == 1) {
     return signIn();
-  }
-
-  if (selected == 2) {
+  } else if (selected == 2) {
     return signUp();
+  } else if(selected == 3) {
+    printError("Good bye!!");
+    throw "exit"; 
+  } else {
+    printError("The number you input doesn't match with available selections");
+    return currentUser();
   }
 
-  printError("The number you input doesn't match with available selections");
-  return currentUser();
 }
