@@ -13,7 +13,6 @@ typedef bool Bool;
 typedef double Double;
 typedef long long Int64;
 typedef uint64_t UInt64;
-typedef uint16_t UInt16;
 typedef int Int;
 
 template <typename T>
@@ -67,6 +66,6 @@ Int readNumberInput(String s);
 UInt64 readLongNumberInput(String s);
 
 // Get user input for given menu
-UInt16 readMenuInput(String title, String question, Vector<String> selections);
+UInt64 readMenuInput(String title, String question, Vector<String> selections);
 
 #endif

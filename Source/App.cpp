@@ -17,7 +17,6 @@ App::App() {
   store = new Store();
 }
 
-
 // Destructor
 App::~App() {
   delete auth;
@@ -64,7 +63,7 @@ void App::getInventoryList() {
   print("-------------------------------------------");
   for (unsigned int i = 0; i < items.size(); ++i) {
     Inventory item = items[i];
-    UInt16 stock = store->numberOfAvailableInventories(item.code);
+    UInt64 stock = store->numberOfAvailableInventories(item.code);
 
     // Generate string representation from double value with 2 decimal place
     String price = formatCurrency("Rp", item.price);

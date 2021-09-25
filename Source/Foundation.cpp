@@ -98,7 +98,7 @@ UInt64 readLongNumberInput(String s) {
 }
 
 // Get user input for given menu
-UInt16 readMenuInput(String title, String question, Vector<String> selections) {
+UInt64 readMenuInput(String title, String question, Vector<String> selections) {
   String dialog = "============MENU============\n";
   if (!title.empty()) {
     dialog.append(title + "\n");
@@ -112,7 +112,7 @@ UInt16 readMenuInput(String title, String question, Vector<String> selections) {
   dialog.append("============================\n");
   dialog.append(question);
   int selected = readNumberInput(dialog);
-  if ((selected > std::numeric_limits<UInt16>::max()) || (selected < std::numeric_limits<UInt16>::min())) {
+  if ((selected > std::numeric_limits<UInt64>::max()) || (selected < std::numeric_limits<UInt64>::min())) {
     printError("The number is out of range. Please try again!\n");
   }
 
@@ -123,7 +123,7 @@ UInt16 readMenuInput(String title, String question, Vector<String> selections) {
     return readMenuInput(title, question, selections);
   }
 
-  return (UInt16)selected;
+  return (UInt64)selected;
 }
 
 // Get current timestamp

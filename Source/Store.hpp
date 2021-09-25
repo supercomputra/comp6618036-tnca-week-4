@@ -56,7 +56,7 @@ class Store {
   * @return the number of available inventories to purchaes
   * @param code the inventory code
   */
-  UInt16 numberOfAvailableInventories(InventoryCode code);
+  UInt64 numberOfAvailableInventories(InventoryCode code);
 
   /**
   * @return the vector of all available inventories

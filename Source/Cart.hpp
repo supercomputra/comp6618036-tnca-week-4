@@ -6,7 +6,7 @@
 
 struct Cart {
  private:
-  HashMap<InventoryCode, UInt16> amountMap;
+  HashMap<InventoryCode, UInt64> amountMap;
 
  public:
   /**
@@ -15,9 +15,9 @@ struct Cart {
    * @param code the inventory code
    * @param amount the amount of inventory to be added to the cart
    */
-  void add(InventoryCode code, UInt16 amount) {
+  void add(InventoryCode code, UInt64 amount) {
     if (amountMap.contains(code)) {
-      UInt16 currentAmount = amountMap.get(code);
+      UInt64 currentAmount = amountMap.get(code);
       amountMap.set(code, (currentAmount + amount));
     }
 
@@ -39,7 +39,7 @@ struct Cart {
    * @return the amount of the inventory 
    * @param code the inventory code
    */
-  UInt16 amountForInventory(InventoryCode code) {
+  UInt64 amountForInventory(InventoryCode code) {
     if (amountMap.contains(code)) {
       return amountMap.get(code);
     }

@@ -27,7 +27,7 @@ Vector<Inventory> Store::getInventories() {
   return inventories;
 }
 
-UInt16 Store::numberOfAvailableInventories(InventoryCode code) {
+UInt64 Store::numberOfAvailableInventories(InventoryCode code) {
   return inventoryStockMap.get(code);
 }
 
@@ -54,9 +54,9 @@ Order Store::purchase(Cart cart, User customer) {
   // Update the stock
   Vector<InventoryCode> codes = inventoryStockMap.allKeys();
   for (unsigned int i = 0; i < codes.size(); i++) {
-    UInt16 reductedAmount = order.cart.amountForInventory(codes[i]);
+    UInt64 reductedAmount = order.cart.amountForInventory(codes[i]);
     if (reductedAmount > 0) {
-      UInt16 currentAmount = inventoryStockMap.get(codes[i]);
+      UInt64 currentAmount = inventoryStockMap.get(codes[i]);
       if (currentAmount <= reductedAmount) {
         inventoryStockMap.set(codes[i], 0);
       } else {
@@ -82,8 +82,8 @@ Cart Store::shop() {
     Inventory inventory = this->inventory(code);
     int amount = readNumberInput("Plese input the number of " + inventory.name + " you want");
 
-    UInt16 available = numberOfAvailableInventories(code);
-    UInt16 currentAmount = cart.amountForInventory(code);
+    UInt64 available = numberOfAvailableInventories(code);
+    UInt64 currentAmount = cart.amountForInventory(code);
 
     if ((currentAmount + amount) > available) {
       printError("Insufficient stock for inventory with id" + code + "which only has " + std::to_string(available) + " in stock.\n");
@@ -125,7 +125,7 @@ String Store::summary(Cart cart) {
   for (unsigned int i = 0; i < keys.size(); i++) {
     InventoryCode code = keys[i];
     Inventory inventory = this->inventory(code);
-    UInt16 amount = cart.amountForInventory(code);
+    UInt64 amount = cart.amountForInventory(code);
     total += (amount * inventory.price);
     summary.append(inventory.code + "\t" + inventory.name + "\t" + std::to_string(amount) + "\t" + formatCurrency("Rp", inventory.price) + "\t" + formatCurrency("Rp", (amount * inventory.price)) + "\n");
   }
