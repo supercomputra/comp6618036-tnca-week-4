@@ -26,16 +26,19 @@ bool Auth::isValidEmailFormat(String email) {
 
 String Auth::getPasswordInput(String question) {
   String password = readLineInput("Please input your password");
+  // Shouldn't contains 8 size
   if (password.size() < 8) {
     printError("Password is too weak. Please use at least 8 characters! \n");
     return getPasswordInput(question);
   }
 
+  // Shouldn't contains weak password
   if (password == "12345678" || password == "qwertyui") {
     printError("Password is too easy to gueast. Please use non common password! \n");
     return getPasswordInput(question);
   }
 
+  // Shouldn't contains whitespace
   for (int i = 0; i < password.size(); i++) {
     if (std::isspace(password[i])) {
       printError("Password should not contains whitespace. Please try agin! \n");

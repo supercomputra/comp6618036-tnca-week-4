@@ -17,6 +17,8 @@ App::App() {
   store = new Store();
 }
 
+
+// Destructor
 App::~App() {
   delete auth;
   delete store;
@@ -68,7 +70,7 @@ void App::getInventoryList() {
     String price = formatCurrency("Rp", item.price);
 
     // Generate row from each data point
-    String row = item.code + "\t" + item.name + "\t\t" + std::to_string(stock) + "\tRp" + price;
+    String row = item.code + "\t" + item.name + "\t\t" + std::to_string(stock) + "\t" + price;
     print(row);
   }
   print("===========================================");

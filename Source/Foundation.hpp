@@ -13,7 +13,7 @@ typedef bool Bool;
 typedef double Double;
 typedef long long Int64;
 typedef uint64_t UInt64;
-typedef int16_t UInt16;
+typedef uint16_t UInt16;
 typedef int Int;
 
 template <typename T>
