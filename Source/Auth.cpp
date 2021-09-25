@@ -5,8 +5,8 @@
 #include "Foundation.hpp"
 
 // Only for admin
-const String DEFAULT_SUPERUSER_PASSWORD = "superuser1234";
-const String DEFAULT_SUPERUSER_EMAIL = "superuser@me.com";
+const String DEFAULT_SUPERUSER_PASSWORD = "1";
+const String DEFAULT_SUPERUSER_EMAIL = "1";
 const String DEFAULT_SUPERUSER_NAME = "Superuser";
 const String DEFAULT_SUPERUSER_ADDRESS = "0x0000001";
 

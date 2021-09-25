@@ -18,8 +18,6 @@ class Store {
 
   Vector<Inventory> inventories;
 
-  Vector<Prescription> prescriptions;
-
   /**
   * @return boolean check whether the inventory with given code exists in the store
   * @param code the inventory code
@@ -65,6 +63,8 @@ class Store {
   * @return the vector of all available inventories
   */
   Vector<Inventory> getInventories();
+
+  Vector<Prescription> prescriptions;
 
   /**
   * Purchase the order
