@@ -6,6 +6,7 @@
 #include "HashMap.hpp"
 #include "Inventory.hpp"
 #include "Order.hpp"
+#include "Prescription.hpp"
 
 class Store {
  private:
@@ -16,6 +17,8 @@ class Store {
   HashMap<InventoryCode, UInt64> inventoryStockMap;
 
   Vector<Inventory> inventories;
+
+  Vector<Prescription> prescriptions;
 
   /**
   * @return boolean check whether the inventory with given code exists in the store

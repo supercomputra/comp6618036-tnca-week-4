@@ -19,6 +19,25 @@ Store::Store() {
   inventoryStockMap.set(bodrex.code, 13);
   inventoryMap.set(bodrex.code, bodrex);
   inventories.push_back(bodrex);
+
+  // Prepare predefined data
+  Cart firstCart = Cart();
+  firstCart.add("OBT003", 2);
+  firstCart.add("OBT001", 3);
+  Prescription firstPrescription = {.id = 1, .cart = firstCart};
+  prescriptions.push_back(firstPrescription);
+
+  Cart secondCart = Cart();
+  secondCart.add("OBT002", 1);
+  Prescription secondPrescription = {.id = 2, .cart = secondCart};
+  prescriptions.push_back(secondPrescription);
+
+  Cart thirdCart = Cart();
+  thirdCart.add("OBT002", 3);
+  thirdCart.add("OBT001", 2);
+  thirdCart.add("OBT003", 2);
+  Prescription thirdPrescription = {.id = 3, .cart = thirdCart};
+  prescriptions.push_back(thirdPrescription);
 }
 
 Store::~Store() {}
