@@ -100,8 +100,29 @@ void App::purchaseByInventory() {
 }
 
 void App::puchaseByPrescription() {
-  printError("Purchase by prescription hasn't implemented yet\n");
-  printError("Please create pull request related to the issue https://github.com/supercomputra/comp6618036-tnca-week-4/issues/2 \n");
+  print("\nHere are our available prescriptions:");
+  print("===========================================");
+  Vector<Prescription>prescriptions = store->prescriptions;
+  for(unsigned int i = 0; i< prescriptions.size(); ++i){
+    Prescription pres = prescriptions[i];
+    print("Prescription " + std::to_string((pres.id)));
+    print("-------------------------------------------");
+    print(store->summary(pres.cart));
+  }
+  UInt64 selectedPrescriptionId;
+  while(true){
+    selectedPrescriptionId = readLongNumberInput("Plese input the prescription number you want to purchase");
+    if(selectedPrescriptionId > 3){
+     printError("Option out of range!\n");
+    } else {
+      break;
+    }
+  }
+
+  Prescription selectedPrescription = prescriptions[selectedPrescriptionId-1];
+  Order orderData = store->purchase(selectedPrescription.cart, auth->currentUser());
+  
+  printSuccess("Purchase successful with order id: " + std::to_string(orderData.id) + '\n');
   run();
 }
 
